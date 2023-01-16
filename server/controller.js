@@ -17,14 +17,12 @@ const getCompliments = (req, res) => {
 
 const deleteComplimentWithID = (req, res) => {
     const id = req.params.id 
-    // delete
     let index = compliments.findIndex(elem => elem.id === id)
     compliments.splice(index, 1)
     res.status(200).send(compliments)
 }
 
 const addCompliment = (req, res) => {
-    console.log('attempting to add');
 	let { author, text } = req.body
 	const newCompliment = {
         author,
