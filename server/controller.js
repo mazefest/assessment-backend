@@ -1,5 +1,4 @@
 const compliments = require('./db.json');
-import { v4 as uuidv4 } from 'uuid';
 
 const getCompliment = (req, res) => {
     const compliments = ["Gee, you're a smart cookie!", "Cool shirt!", "Your Javascript skills are stellar."];
@@ -24,10 +23,11 @@ const deleteComplimentWithID = (req, res) => {
 
 const addCompliment = (req, res) => {
 	let { author, text } = req.body
+    let randomId = getRndInteger(1000000000, 9999999999);
 	const newCompliment = {
         author,
         text,
-		id: uuidv4() 
+		id: randomId 
 	};
 
 	compliments.push(newCompliment)
@@ -50,6 +50,10 @@ const getFortune = (req, res) => {
     res.status(200).send(randomFortune);
 }
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 module.exports = { 
     getFortune,
     getCompliment,
@@ -57,3 +61,4 @@ module.exports = {
     deleteComplimentWithID,
     addCompliment
 }
+
